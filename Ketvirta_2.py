@@ -24,6 +24,93 @@ credentials_files = [
     'data2.txt'
 ]
 
+@pytest.fixture(scope="session", autouse=True)
+def register_user_once():
+    options = Options()
+    options.add_argument("start-maximized")
+    options.add_argument("disable-infobars")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    options.add_argument('--headless')
+    options.binary_location = "/usr/bin/chromium"
+    driver = webdriver.Chrome(options=options)
+    driver.get('https://demowebshop.tricentis.com/')
+
+    login_link = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, "//a[@href='/login']")
+        )
+    )
+    login_link.click()
+
+    register_button = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, "//input[@value='Register']")
+        )
+    )
+    register_button.click()
+
+    gender_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, "gender-male")
+        )
+    )
+    gender_button.click()
+
+    first_name_form = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.ID, "FirstName")
+        )
+    )
+    first_name_form.send_keys("first")
+
+    last_name_form = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.ID, "LastName")
+        )
+    )
+    last_name_form.send_keys("last")
+
+    email_form = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.ID, "Email")
+        )
+    )
+    email_form.send_keys("last@mail.com")
+
+
+    password_form = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.ID, "Password")
+        )
+    )
+    password_form.send_keys("password")
+
+
+    confirm_password_form = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.ID, "ConfirmPassword")
+        )
+    )
+    confirm_password_form.send_keys("password")
+
+    register_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, "register-button")
+        )
+    )
+    register_button.click()
+
+    continue_button = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, "//input[@value='Continue']")
+        )
+    )
+    continue_button.click()
+
+    driver.quit()
+
 @pytest.fixture(scope="function")
 def driver():
     options = Options()
