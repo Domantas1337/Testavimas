@@ -101,15 +101,15 @@ def test_webshop_login(driver, file_path):
 
     expected_quantity -= 1
 
-    cart_quantity_updated = WebDriverWait(driver, 20).until(
+    cart_quantity_updated = WebDriverWait(driver, 30).until(
         lambda d: d.find_element(By.CLASS_NAME, 'cart-qty').text == ("(" + str(expected_quantity) +")")
     )
     
     print(expected_quantity)
 
     shopping_cart_link_locator = (By.XPATH, "//a[@href='/cart']")
-    shopping_cart_link = WebDriverWait(driver, 20).until(
-        EC.elementToBeClickable(shopping_cart_link_locator)
+    shopping_cart_link = WebDriverWait(driver, 30).until(
+        EC.element_to_be_clickable(shopping_cart_link_locator)
     )
     shopping_cart_link.click()
 
