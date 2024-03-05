@@ -34,7 +34,7 @@ def driver():
     options.add_argument("--no-sandbox")
     options.add_argument('--headless')
     options.binary_location = "/usr/bin/chromium"
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome()
     driver.get('https://demowebshop.tricentis.com/')
     yield driver 
     driver.quit()
@@ -70,7 +70,7 @@ def test_webshop_login(driver, file_path):
     )
     digital_downloads_link.click()
 
-    items_to_buy = read_file_data(fr'C:\Users\doman\OneDrive\Documents\6_semestras\Testavimas\{file_path}')
+    items_to_buy = read_file_data(file_path)
     
     expected_quantity = 0
     for item in items_to_buy:
