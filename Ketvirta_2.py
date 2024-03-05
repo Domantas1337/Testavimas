@@ -72,7 +72,10 @@ def test_webshop_login(driver, file_path):
 
     items_to_buy = read_file_data(file_path)
     
-    expected_quantity = 18
+    cart_quantity_text = driver.find_element(By.CLASS_NAME, 'cart-qty').text
+    cart_quantity_number = int(cart_quantity_text.strip("()"))
+
+    expected_quantity = cart_quantity_number + 1
     for item in items_to_buy:
         
 
@@ -104,8 +107,9 @@ def test_webshop_login(driver, file_path):
     
     print(expected_quantity)
 
+    shopping_cart_link_locator = (By.XPATH, "//a[@href='/cart']")
     shopping_cart_link = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.XPATH, "//a[@href='/cart']"))
+        EC.elementToBeClickable(shopping_cart_link_locator)
     )
     shopping_cart_link.click()
 
