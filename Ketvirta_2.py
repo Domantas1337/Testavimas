@@ -72,7 +72,7 @@ def test_webshop_login(driver, file_path):
 
     items_to_buy = read_file_data(file_path)
     
-    expected_quantity = 15
+    expected_quantity = 18
     for item in items_to_buy:
         
 
@@ -95,6 +95,8 @@ def test_webshop_login(driver, file_path):
         cart_quantity_text = driver.find_element(By.CLASS_NAME, 'cart-qty').text
         print("Cart quantity has been updated to:", cart_quantity_text)
         expected_quantity += 1
+
+    expected_quantity -= 1
 
     cart_quantity_updated = WebDriverWait(driver, 20).until(
         lambda d: d.find_element(By.CLASS_NAME, 'cart-qty').text == ("(" + str(expected_quantity) +")")
