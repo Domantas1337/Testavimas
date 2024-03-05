@@ -9,7 +9,7 @@ import os
 from selenium.webdriver.edge.service import Service
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementNotInteractableException
 from selenium.webdriver.chrome.options import Options
-
+import datetime
 
 
 
@@ -23,6 +23,14 @@ credentials_files = [
     'data1.txt',
     'data2.txt'
 ]
+
+current_datetime = datetime.now()
+
+# Format the date string as DDMM
+date_string = current_datetime.strftime("%d%M")
+
+# Construct the email string
+email = "maaiill" + date_string + "@mail.com"
 
 @pytest.fixture(scope="session", autouse=True)
 def register_user_once():
@@ -77,7 +85,7 @@ def register_user_once():
             (By.ID, "Email")
         )
     )
-    email_form.send_keys("last@mail.com")
+    email_form.send_keys(email)
 
 
     password_form = WebDriverWait(driver, 10).until(
@@ -139,7 +147,7 @@ def test_webshop_login(driver, file_path):
         EC.presence_of_element_located((By.ID, "Email"))
     )
     email_form.clear()
-    email_form.send_keys("last@mail.com")
+    email_form.send_keys(email)
 
     password_form = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, "Password"))
