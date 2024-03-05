@@ -34,7 +34,7 @@ def driver():
     options.add_argument("--no-sandbox")
     options.add_argument('--headless')
     options.binary_location = "/usr/bin/chromium"
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(options=options)
     driver.get('https://demowebshop.tricentis.com/')
     yield driver 
     driver.quit()
