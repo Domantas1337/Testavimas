@@ -8,6 +8,7 @@ import time
 import os
 from selenium.webdriver.edge.service import Service
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementNotInteractableException
+from selenium.webdriver.chrome.options import Options
 
 
 
@@ -25,7 +26,10 @@ credentials_files = [
 
 @pytest.fixture(scope="function")
 def driver():
-    driver = webdriver.Chrome()
+    chrome_options = Options()
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get('https://demowebshop.tricentis.com/')
     yield driver 
     driver.quit()
