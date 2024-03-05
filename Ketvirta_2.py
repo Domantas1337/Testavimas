@@ -26,15 +26,15 @@ credentials_files = [
 
 @pytest.fixture(scope="function")
 def driver():
-    chrome_options = Options()
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("start-maximized");
-    chrome_options.add_argument("disable-infobars"); 
-    chrome_options.add_argument("--disable-extensions"); 
-    chrome_options.add_argument("--disable-gpu"); 
-    chrome_options.add_argument("--disable-dev-shm-usage"); 
-    chrome_options.add_argument("--no-sandbox");
-    driver = webdriver.Chrome(options=chrome_options)
+    options = Options()
+    options.add_argument("start-maximized")
+    options.add_argument("disable-infobars")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    options.add_argument('--headless')
+    options.binary_location = "/usr/bin/chromium-browser"
+    driver = webdriver.Chrome(options=options)
     driver.get('https://demowebshop.tricentis.com/')
     yield driver 
     driver.quit()
