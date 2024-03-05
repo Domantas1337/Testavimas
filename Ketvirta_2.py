@@ -86,13 +86,13 @@ def test_webshop_login(driver, file_path):
         add_to_cart_button.click()
 
         cart_quantity_updated = WebDriverWait(driver, 20).until(
-            lambda d: d.find_element(By.CLASS_NAME, 'cart-qty').text != ("(" + str(expected_quantity) +")")
+            lambda d: d.find_element(By.CLASS_NAME, 'cart-qty').text == ("(" + str(expected_quantity) +")")
         )
 
         expected_quantity += 1
 
     cart_quantity_updated = WebDriverWait(driver, 20).until(
-        lambda d: d.find_element(By.CLASS_NAME, 'cart-qty').text != ("(" + str(expected_quantity) +")")
+        lambda d: d.find_element(By.CLASS_NAME, 'cart-qty').text == ("(" + str(expected_quantity) +")")
     )
     
     print(expected_quantity)
