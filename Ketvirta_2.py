@@ -9,7 +9,7 @@ import os
 from selenium.webdriver.edge.service import Service
 from selenium.common.exceptions import NoSuchElementException, TimeoutException, ElementNotInteractableException
 from selenium.webdriver.chrome.options import Options
-import datetime
+from datetime import datetime
 
 
 
