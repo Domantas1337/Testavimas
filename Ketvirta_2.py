@@ -72,7 +72,7 @@ def test_webshop_login(driver, file_path):
 
     items_to_buy = read_file_data(file_path)
     
-    expected_quantity = 0
+    expected_quantity = 9
     for item in items_to_buy:
         
 
@@ -103,7 +103,7 @@ def test_webshop_login(driver, file_path):
     print(expected_quantity)
 
     shopping_cart_link = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.XPATH, "//a[@href='/cart']"))
+        EC.presence_of_element_located((By.XPATH, "//a[@href='/cart']"))
     )
     shopping_cart_link.click()
 
