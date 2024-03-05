@@ -72,7 +72,7 @@ def test_webshop_login(driver, file_path):
 
     items_to_buy = read_file_data(file_path)
     
-    expected_quantity = 9
+    expected_quantity = 15
     for item in items_to_buy:
         
 
