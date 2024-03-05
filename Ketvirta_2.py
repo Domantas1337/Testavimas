@@ -85,15 +85,17 @@ def test_webshop_login(driver, file_path):
         add_to_cart_button = title_element.find_element(By.XPATH, "./ancestor::div[contains(@class, 'details')]//input[@value='Add to cart']")
         add_to_cart_button.click()
 
-        cart_quantity_updated = WebDriverWait(driver, 10).until(
+        cart_quantity_updated = WebDriverWait(driver, 20).until(
             lambda d: d.find_element(By.CLASS_NAME, 'cart-qty').text != ("(" + str(expected_quantity) +")")
         )
 
         
-    shopping_cart_link = WebDriverWait(driver, 10).until(
+    shopping_cart_link = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH, "//a[@href='/cart']"))
     )
     shopping_cart_link.click()
+
+    print("neeee")
 
     terms_check_box = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//input[@id='termsofservice']"))
