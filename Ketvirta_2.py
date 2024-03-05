@@ -89,6 +89,8 @@ def test_webshop_login(driver, file_path):
             lambda d: d.find_element(By.CLASS_NAME, 'cart-qty').text == ("(" + str(expected_quantity) +")")
         )
 
+        cart_quantity_text = driver.find_element(By.CLASS_NAME, 'cart-qty').text
+        print("Cart quantity has been updated to:", cart_quantity_text)
         expected_quantity += 1
 
     cart_quantity_updated = WebDriverWait(driver, 20).until(
